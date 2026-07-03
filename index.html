@@ -128,25 +128,25 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 .cal-d.en.inr{border-radius:0 8px 8px 0}
 .cal-foot{font-size:11.5px;color:var(--ink-3);margin-top:8px;text-align:center}
 
-/* ---------- Table ---------- */
-.tbl{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-1)}
+/* ---------- Table (app-wide pattern) ---------- */
+.tbl{background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
 .tbl-h,.tbl-r{display:grid;grid-template-columns:150px 130px 1fr 1.4fr 1.3fr 70px;align-items:center;gap:12px;padding:15px 22px}
-.tbl-h{border-bottom:1px solid var(--border);background:var(--surface-2)}
-.tbl-h span{font-size:12px;color:var(--ink-3);font-weight:600;display:inline-flex;align-items:center;gap:5px}
-.tbl-h .ic{width:13px;height:13px;stroke-width:2.2}
-.tbl-r{border-bottom:1px solid var(--border);cursor:pointer;transition:.1s}
-.tbl-r:last-child{border-bottom:0}
+.tbl-h{background:var(--surface-2);border-radius:12px;border-bottom:0;padding:11px 22px;margin-bottom:8px}
+.tbl-h span{font-size:12.5px;color:var(--ink-2);font-weight:500;display:inline-flex;align-items:center;gap:5px}
+.tbl-h .ic{width:13px;height:13px;stroke-width:2}
+.tbl-r{background:var(--surface);border:0;border-radius:12px;padding:20px 22px;margin-bottom:8px;cursor:pointer;transition:.1s;box-shadow:var(--sh-1)}
+.tbl-r:last-child{margin-bottom:0}
 .tbl-r:hover{background:var(--surface-2)}
 .tbl-r.fresh{background:var(--accent-soft)}
-.oid{font-weight:700;font-size:14.5px}
+.oid{font-weight:700;font-size:15px}
 .muted{color:var(--ink-2)}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
 .badge .d{width:7px;height:7px;border-radius:50%}
 .badge.ok{background:var(--green-soft);color:var(--green)} .badge.ok .d{background:var(--green)}
 .badge.proc{background:var(--amber-soft);color:var(--amber)} .badge.proc .d{background:var(--amber)}
 .badge.fail{background:var(--red-soft);color:var(--red)} .badge.fail .d{background:var(--red)}
 .rowchev{color:var(--ink-4);justify-self:end}
-.nomatch{padding:48px;text-align:center;color:var(--ink-3)}
+.nomatch{padding:48px;text-align:center;color:var(--ink-3);background:var(--surface)}
 
 /* ---------- Empty state ---------- */
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 24px}
@@ -418,11 +418,11 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 
           <div class="tbl">
             <div class="tbl-h">
-              <span>Order <svg class="ic"><use href="#i-sort"/></svg></span>
-              <span>Date <svg class="ic"><use href="#i-sort"/></svg></span>
-              <span>No. of assets <svg class="ic"><use href="#i-sort"/></svg></span>
-              <span>Delivery <svg class="ic"><use href="#i-sort"/></svg></span>
-              <span>Payment status <svg class="ic"><use href="#i-sort"/></svg></span>
+              <span>Order <svg class="ic"><use href="#i-sortd"/></svg></span>
+              <span>Date <svg class="ic"><use href="#i-sortd"/></svg></span>
+              <span>No. of assets <svg class="ic"><use href="#i-sortd"/></svg></span>
+              <span>Delivery <svg class="ic"><use href="#i-sortd"/></svg></span>
+              <span>Payment status <svg class="ic"><use href="#i-sortd"/></svg></span>
               <span style="justify-self:end">Action</span>
             </div>
             <div id="ordersBody"></div>
@@ -557,6 +557,7 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
   <symbol id="i-arr-l" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
   <symbol id="i-arr-r" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
   <symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 9l4-5 4 5M8 15l4 5 4-5"/></symbol>
+  <symbol id="i-sortd" viewBox="0 0 24 24"><path d="M6 5v13M6 18l-2.6-2.6M6 18l2.6-2.6"/><path d="M12 6h9M12 12h7M12 18h5"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
   <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8L9.5 3.5A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
