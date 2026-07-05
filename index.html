@@ -6,22 +6,41 @@
 <title>Alliance Laundry · Print Orders</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F7F8FA; --surface:#FFFFFF; --surface-2:#F1F3F6; --surface-3:#E9ECF0;
-  --ink:#1A1D26; --ink-2:#5A606E; --ink-3:#8A909E; --ink-4:#AEB4C0;
-  --border:#EAECF0; --border-2:#DCDFE6;
-  --accent:#1E96FC; --accent-hover:#0D85EA; --accent-soft:#E6F4FF; --accent-border:#B5DFFE;
-  --green:#22A05B; --green-soft:#E5F6EC; --green-border:#BEE6CF;
-  --amber:#D9880D; --amber-soft:#FCF1DC; --amber-border:#EDD6A6;
-  --red:#E2483D; --red-soft:#FCECEA; --red-border:#F2CBC5;
-  --sq:#D9531E; /* Speed Queen orange */
+  /* SETVI Design System 2.0 tokens (from Figma variables) */
+  --bg:#F8F9FA;              /* Background/Subtle */
+  --surface:#FFFFFF;         /* Background/Primary */
+  --surface-2:#EEF0F2;       /* Background/Neutral · Hover */
+  --surface-3:#E8ECEE;       /* Background/Pressed */
+  --ink:#20262D;             /* Text/Primary */
+  --ink-2:#333D47;           /* Text/Secondary */
+  --ink-3:#5D7083;           /* Text/Tertiary · Icon/Subtle */
+  --ink-4:#AFBAC6;           /* Text/Disabled */
+  --border:#EEF0F2;          /* Border/Subtle */
+  --border-2:#AFBAC6;        /* Border/Primary */
+  --accent:#1E96FC;          /* Background/Brand · Primary/500 */
+  --accent-hover:#4AA9FD;    /* Background/Brand Hover */
+  --accent-pressed:#037AE2;  /* Background/Brand Pressed */
+  --accent-soft:#EBF5FF;     /* Background/Brand Subtle */
+  --accent-border:#D2EAFE;   /* Background/Brand Subtle Hover */
+  --green:#23A566;           /* Positive */
+  --green-soft:#E6FAF0;      /* Positive Subtle */
+  --green-border:#CDF4E1;    /* Positive Subtle Hover */
+  --amber:#F08B0F;           /* Warning */
+  --amber-soft:#FCE8CF;      /* Warning Subtle */
+  --amber-border:#F8D3A3;
+  --red:#FA2020;             /* Negative */
+  --red-soft:#FED2D2;        /* Negative Subtle */
+  --red-border:#FDB9B9;      /* Negative Subtle Hover */
+  --setvi-navy:#01294B;      /* Setvi Blue/500 */
+  --sq:#D9531E;              /* Speed Queen orange (client brand) */
   --r-sm:7px; --r:10px; --r-lg:14px; --r-xl:20px;
-  --sh-1:0 1px 2px rgba(20,20,35,.05);
-  --sh-2:0 6px 20px rgba(20,20,35,.08),0 1px 3px rgba(20,20,35,.05);
-  --sh-3:0 24px 60px rgba(20,20,35,.22),0 6px 16px rgba(20,20,35,.10);
-  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --sh-1:0 2px 4px rgba(48,54,60,.04);                                   /* DS Shadow/S layer 1 */
+  --sh-2:0 2px 4px rgba(48,54,60,.04),0 16px 32px -4px rgba(48,54,60,.10); /* DS Shadow/S */
+  --sh-3:0 4px 4px rgba(48,54,60,.04),0 24px 48px -8px rgba(48,54,60,.16); /* DS Shadow/M */
+  --font:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;  /* Family/Main */
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
@@ -49,7 +68,7 @@ input{font-family:inherit}
 
 .main{display:flex;flex-direction:column;min-width:0}
 .topbar{height:66px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:30}
-.topbar h1{font-size:21px;font-weight:700;margin:0;letter-spacing:-.01em}
+.topbar h1{font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em;line-height:28px}
 .top-right{display:flex;align-items:center;gap:18px}
 .bell{position:relative;color:var(--ink-2);cursor:pointer}
 .bell .dot{position:absolute;top:-1px;right:-1px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--surface)}
@@ -72,67 +91,87 @@ input{font-family:inherit}
 
 /* ---------- Page head ---------- */
 .phead{display:flex;align-items:center;gap:14px;margin-bottom:22px}
-.phead h2{font-size:22px;font-weight:700;margin:0;letter-spacing:-.01em}
+.phead h2{font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em;line-height:28px}
 
-/* ---------- KPIs ---------- */
+/* ---------- KPIs (DS KPI Card component) ---------- */
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--sh-1)}
-.kpi-top{display:flex;align-items:center;gap:11px;margin-bottom:13px}
-.kpi-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);background:var(--surface-2);flex-shrink:0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 18px;box-shadow:var(--sh-1)}
+.kpi-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.kpi-ic{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-3);background:var(--surface-2);flex-shrink:0}
 .kpi-ic .ic{width:17px;height:17px;stroke-width:2}
 .kpi-ic.blue{color:var(--accent);background:var(--accent-soft)}
 .kpi-ic.green{color:var(--green);background:var(--green-soft)}
 .kpi-ic.red{color:var(--red);background:var(--red-soft)}
-.kpi-lbl{font-size:14.5px;color:var(--ink);font-weight:600;letter-spacing:-.01em}
-.kpi-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.kpi-val{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1}
-.kpi-val.red{color:var(--red)}
-.kpi-sub{font-size:12.5px;color:var(--ink-3);text-align:right}
+.kpi-lbl{font-size:14px;color:var(--ink-3);font-weight:500;line-height:20px}
+.kpi-val{font-size:16px;font-weight:600;color:var(--ink);line-height:24px;letter-spacing:0}
 
 /* ---------- Filter row ---------- */
 .filters{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.filters .searchpill{flex:1;max-width:280px}
+.filters .searchpill{flex:1;max-width:360px}
 .select,.searchpill{height:44px;border:1px solid var(--border-2);background:var(--surface);border-radius:999px;font-size:14px;color:var(--ink);display:inline-flex;align-items:center;gap:9px;padding:0 16px}
 .selwrap{position:relative;display:inline-flex}
 .selwrap>.ic{position:absolute;right:15px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ink-3);width:16px;height:16px}
-select.select{appearance:none;-webkit-appearance:none;padding:0 40px 0 16px;cursor:pointer;color:var(--ink);font-weight:500;outline:none}
+select.select{appearance:none;-webkit-appearance:none;padding:0 40px 0 16px;cursor:pointer;color:var(--ink-3);font-weight:400;outline:none}
 select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.datebtn{cursor:pointer;font-weight:500;border:1px solid var(--border-2)}
+.datebtn{cursor:pointer;font-weight:400;color:var(--ink-3);border:1px solid var(--border-2)}
+.dateclear{display:none;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;color:var(--ink-4);margin-left:2px;flex-shrink:0}
+.dateclear:hover{color:var(--ink-2);background:var(--surface-2)}
+.dateclear .ic{width:14px;height:14px}
+.datebtn.hasval .dateclear{display:flex}
 .datebtn:hover{background:var(--surface-2)}
 .datebtn .ic{color:var(--ink-3)}
 .searchpill{color:var(--ink-3)}
 .searchpill input{border:0;outline:0;background:transparent;font-size:14px;color:var(--ink);width:100%}
 .grow{flex:1}
-/* calendar popover */
+/* status dropdown */
+.ddanchor{position:relative;display:inline-flex}
+.ddbtn{cursor:pointer;font-weight:400;color:var(--ink-3);gap:10px}
+.ddbtn.filled{color:var(--ink-2);font-weight:500}
+.ddbtn.open{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.ddbtn .ic{color:var(--ink-3)}
+.ddpop{position:absolute;top:52px;right:0;z-index:60;min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-3);padding:10px;display:none}
+.ddpop.open{display:block}
+.dd-h{font-size:14.5px;font-weight:700;padding:6px 10px 10px;color:var(--ink)}
+.dd-opt{display:flex;align-items:center;gap:13px;width:100%;border:0;background:transparent;padding:10px;border-radius:9px;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;text-align:left;font-family:inherit}
+.dd-opt:hover{background:var(--surface-2)}
+.dd-opt .dot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+/* calendar popover — DS Date Range */
 .calanchor{position:relative;display:inline-flex}
-.calpop{position:absolute;top:52px;left:0;z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--sh-3);display:none;padding:14px;gap:14px}
+.calpop{position:absolute;top:52px;right:0;z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-3);display:none;flex-direction:column;padding:0;min-width:520px}
 .calpop.open{display:flex}
-.cal-presets{display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--border);padding-right:12px;min-width:120px}
-.cal-presets button{border:0;background:transparent;text-align:left;font-size:13px;color:var(--ink-2);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:500}
-.cal-presets button:hover{background:var(--surface-2)}
-.cal-presets button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.cal{width:254px}
-.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cal-h .m{font-size:13.5px;font-weight:700}
-.cal-nav{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-2);background:var(--surface);color:var(--ink-2);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.cal-echo{padding:12px 16px;font-size:14px;color:var(--ink-3);border-bottom:1px solid var(--border)}
+.cal-echo.set{color:var(--ink)}
+.cal-months{display:flex;gap:8px;padding:10px 8px 4px}
+.cal-month{width:250px;padding:0 8px}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;padding:4px 2px}
+.cal-h .m{font-size:14px;font-weight:600;color:var(--ink)}
+.cal-nav{width:26px;height:26px;border:0;background:transparent;border-radius:6px;color:var(--ink-2);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .cal-nav:hover{background:var(--surface-2)}
+.cal-nav .ic{width:14px;height:14px}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px}
-.cal-dow{font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--ink-4);text-align:center;padding:4px 0;text-transform:uppercase}
-.cal-d{height:32px;border:0;background:transparent;font-size:12.5px;font-weight:500;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.cal-dow{font-size:12px;font-weight:500;color:var(--ink-3);text-align:center;padding:5px 0}
+.cal-d{height:32px;border:1px solid transparent;background:transparent;font-size:13px;font-weight:400;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .cal-d:hover{background:var(--surface-2);border-radius:8px}
 .cal-d.mut{color:var(--ink-4)}
-.cal-d.dis{color:var(--ink-4);opacity:.45;cursor:default}
+.cal-d.today{border:1px solid var(--accent);border-radius:8px;color:var(--accent)}
 .cal-d.inr{background:var(--accent-soft);border-radius:0}
-.cal-d.st,.cal-d.en{background:var(--accent);color:#fff;border-radius:8px}
+.cal-d.st,.cal-d.en{background:var(--accent);color:#fff;border-radius:8px;font-weight:500}
 .cal-d.st.inr{border-radius:8px 0 0 8px}
 .cal-d.en.inr{border-radius:0 8px 8px 0}
+.cal-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--border)}
+.cal-links{display:flex;gap:20px}
+.cal-link{border:0;background:transparent;color:var(--accent);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;padding:0}
+.cal-link:hover{color:var(--accent-pressed)}
+.cal-ok{border:0;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;padding:7px 18px;cursor:pointer;font-family:inherit}
+.cal-ok:hover{background:var(--accent-hover)}
+.cal-ok:disabled{background:var(--surface-2);color:var(--ink-4);cursor:default}
 .cal-foot{font-size:11.5px;color:var(--ink-3);margin-top:8px;text-align:center}
 
 /* ---------- Table (app-wide pattern) ---------- */
 .tbl{background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
 .tbl-h,.tbl-r{display:grid;grid-template-columns:150px 130px 1fr 1.4fr 1.3fr 70px;align-items:center;gap:12px;padding:15px 22px}
 .tbl-h{background:var(--surface-2);border-radius:12px;border-bottom:0;padding:11px 22px;margin-bottom:8px}
-.tbl-h span{font-size:12.5px;color:var(--ink-2);font-weight:500;display:inline-flex;align-items:center;gap:5px}
+.tbl-h span{font-size:12px;color:var(--ink-2);font-weight:500;display:inline-flex;align-items:center;gap:5px}
 .tbl-h .ic{width:13px;height:13px;stroke-width:2}
 .tbl-r{background:var(--surface);border:0;border-radius:12px;padding:20px 22px;margin-bottom:8px;cursor:pointer;transition:.1s;box-shadow:var(--sh-1)}
 .tbl-r:last-child{margin-bottom:0}
@@ -140,8 +179,8 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 .tbl-r.fresh{background:var(--accent-soft)}
 .oid{font-weight:700;font-size:15px}
 .muted{color:var(--ink-2)}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
-.badge .d{width:7px;height:7px;border-radius:50%}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:16px;font-size:12px;line-height:16px;font-weight:600}
+.badge .d{width:8px;height:8px;border-radius:4px}
 .badge.ok{background:var(--green-soft);color:var(--green)} .badge.ok .d{background:var(--green)}
 .badge.proc{background:var(--amber-soft);color:var(--amber)} .badge.proc .d{background:var(--amber)}
 .badge.fail{background:var(--red-soft);color:var(--red)} .badge.fail .d{background:var(--red)}
@@ -156,10 +195,12 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 .empty p{margin:0 0 20px;color:var(--ink-2);max-width:340px}
 
 /* ---------- Asset tabs + grid ---------- */
-.tabs{display:flex;gap:4px;background:var(--surface);border-radius:999px;padding:4px;box-shadow:var(--sh-1);border:1px solid var(--border)}
-.tab{border:0;background:transparent;color:var(--ink-2);font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px;cursor:pointer;transition:.12s}
-.tab:hover{color:var(--ink)}
+/* DS Segmented Controller (M) */
+.tabs{display:flex;gap:8px;align-items:center}
+.tab{border:0;background:transparent;color:var(--ink-3);font-size:14px;line-height:20px;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.12s;font-family:inherit}
+.tab:hover{color:var(--ink-2);background:var(--surface-2)}
 .tab.on{background:var(--accent-soft);color:var(--accent)}
+.tab.on:hover{background:var(--accent-border)}
 .toolbar2{display:flex;align-items:center;margin-bottom:20px;gap:14px}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
@@ -167,12 +208,12 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 .acard:hover{box-shadow:var(--sh-2)}
 .acard.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .acard-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.cbx{width:22px;height:22px;border-radius:6px;border:2px solid var(--border-2);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.12s;flex-shrink:0}
+.cbx{width:22px;height:22px;border-radius:6px;border:2px solid var(--border-2);background:var(--surface);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.12s;flex-shrink:0}
 .cbx .ic{width:14px;height:14px;stroke:#fff;stroke-width:3;opacity:0}
 .acard.selected .cbx{background:var(--accent);border-color:var(--accent)}
 .acard.selected .cbx .ic{opacity:1}
-.cbx.locked{border-style:dashed;cursor:pointer}
-.atag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+.cbx.locked{cursor:pointer}
+.atag{font-size:12px;line-height:16px;font-weight:600;padding:4px 8px;border-radius:16px}
 .atag.rtp{background:var(--surface);border:1px solid var(--border-2);color:var(--ink-2)}
 .atag.cust{background:var(--accent-soft);color:var(--accent)}
 .athumb{height:180px;border-radius:12px;overflow:hidden;cursor:pointer;background:var(--surface-2);display:flex;align-items:center;justify-content:center;position:relative}
@@ -216,7 +257,7 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 .modal{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-3);width:100%;max-width:1000px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;animation:pop .18s ease}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
 .m-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;border-bottom:1px solid var(--border)}
-.m-head h2{margin:0;font-size:19px;font-weight:700}
+.m-head h2{margin:0;font-size:20px;font-weight:600;line-height:28px}
 .x{width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--ink-2);display:flex;align-items:center;justify-content:center}
 .x:hover{background:var(--surface-2)}
 .m-body{display:flex;gap:24px;padding:24px 26px;overflow-y:auto}
@@ -241,12 +282,12 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 
 .dv-right{flex:1;min-width:0;display:flex;flex-direction:column}
 .desc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:20px}
-.desc-h{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}
+.desc-h{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:600;margin-bottom:12px}
 .desc-body p{margin:0 0 14px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
 .kv{display:flex;font-size:13.5px;padding:5px 0}
 .kv .k{color:var(--ink-3);width:96px;flex-shrink:0}
 .kv .v{font-weight:600}
-.cust-h{font-size:16px;font-weight:700;margin:4px 0 16px}
+.cust-h{font-size:16px;font-weight:600;margin:4px 0 16px}
 .crow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .crow .lbl{font-size:14.5px;font-weight:600}
 .switch{position:relative;width:44px;height:25px;border-radius:999px;background:var(--border-2);cursor:pointer;transition:.16s;flex-shrink:0}
@@ -311,13 +352,13 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 
 /* ---------- Order detail ---------- */
 .od-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
-.od-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--sh-1)}
-.od-h{display:flex;align-items:center;gap:11px;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin-bottom:13px}
-.od-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface-2);color:var(--ink-3)}
+.od-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 18px;box-shadow:var(--sh-1)}
+.od-h{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--ink-3);line-height:20px;margin-bottom:8px}
+.od-ic{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface-2);color:var(--ink-3)}
 .od-ic .ic{width:17px;height:17px;stroke-width:2}
 .od-ic.blue{background:var(--accent-soft);color:var(--accent)}
 .od-ic.green{background:var(--green-soft);color:var(--green)}
-.od-strong{font-size:14.5px;font-weight:600;margin-bottom:3px}
+.od-strong{font-size:16px;font-weight:600;line-height:24px;margin-bottom:3px}
 .od-line{font-size:13.5px;color:var(--ink-2);line-height:1.5}
 .od-kv{display:flex;justify-content:space-between;font-size:13.5px;padding:3px 0}
 .od-kv .k{color:var(--ink-3)} .od-kv .v{font-weight:600}
@@ -336,7 +377,7 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 /* toast */
 .toast{position:fixed;bottom:26px;left:calc(50% + 43px);transform:translateX(-50%) translateY(18px);background:var(--ink);color:#fff;padding:13px 20px;border-radius:999px;font-size:14px;font-weight:500;box-shadow:var(--sh-3);display:flex;align-items:center;gap:10px;opacity:0;pointer-events:none;transition:.24s;z-index:90}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast .ic{stroke:#7FE3AB}
+.toast .ic{color:#7FE3AB}
 
 .screen{display:none} .screen.active{display:block}
 [data-st]{display:none} [data-st].show{display:block}
@@ -383,37 +424,42 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
       <div class="content">
         <div data-st="filled" class="show" id="ordersFilled">
           <div class="kpis">
-            <div class="kpi"><div class="kpi-top"><span class="kpi-ic blue"><svg class="ic sm"><use href="#i-cart"/></svg></span><span class="kpi-lbl">Total Print Orders</span></div><div class="kpi-row"><div class="kpi-val" id="kOrders">0</div><div class="kpi-sub">Last 90 days</div></div></div>
-            <div class="kpi"><div class="kpi-top"><span class="kpi-ic"><svg class="ic sm"><use href="#i-file"/></svg></span><span class="kpi-lbl">Assets ordered</span></div><div class="kpi-row"><div class="kpi-val" id="kItems">0</div><div class="kpi-sub">Across all orders</div></div></div>
-            <div class="kpi"><div class="kpi-top"><span class="kpi-ic green"><svg class="ic sm"><use href="#i-check-c"/></svg></span><span class="kpi-lbl">Completed</span></div><div class="kpi-row"><div class="kpi-val" id="kDone">0</div><div class="kpi-sub" id="kDoneSub">—</div></div></div>
-            <div class="kpi"><div class="kpi-top"><span class="kpi-ic red"><svg class="ic sm"><use href="#i-alert"/></svg></span><span class="kpi-lbl">Needs attention</span></div><div class="kpi-row"><div class="kpi-val red" id="kAttn">0</div><div class="kpi-sub" id="kAttnSub">—</div></div></div>
+            <div class="kpi"><div class="kpi-top"><span class="kpi-ic blue"><svg class="ic sm"><use href="#i-cart"/></svg></span><span class="kpi-lbl">Total Print Orders</span></div><div class="kpi-val" id="kOrders">—</div></div>
+            <div class="kpi"><div class="kpi-top"><span class="kpi-ic"><svg class="ic sm"><use href="#i-file"/></svg></span><span class="kpi-lbl">Assets ordered</span></div><div class="kpi-val" id="kItems">—</div></div>
+            <div class="kpi"><div class="kpi-top"><span class="kpi-ic green"><svg class="ic sm"><use href="#i-check-c"/></svg></span><span class="kpi-lbl">Completed</span></div><div class="kpi-val" id="kDone">—</div></div>
+            <div class="kpi"><div class="kpi-top"><span class="kpi-ic red"><svg class="ic sm"><use href="#i-alert"/></svg></span><span class="kpi-lbl">Needs attention</span></div><div class="kpi-val" id="kAttn">—</div></div>
           </div>
 
           <div class="filters">
-            <div class="selwrap">
-              <select class="select" id="fStatus" onchange="renderOrders()">
-                <option value="all">All statuses</option><option value="paid">Paid</option><option value="processing">Processing</option><option value="failed">Failed</option>
-              </select>
-              <svg class="ic"><use href="#i-cd"/></svg>
+            <div class="grow"></div>
+            <div class="searchpill"><svg class="ic sm"><use href="#i-search"/></svg><input id="fSearch" placeholder="Search Order ID or city…" oninput="renderOrders()"></div>
+            <div class="ddanchor">
+              <button class="select ddbtn" id="statusBtn" onclick="toggleStatusDD(event)"><span id="statusLbl">By status</span> <svg class="ic sm" id="statusChev" style="transition:transform .15s"><use href="#i-cd"/></svg></button>
+              <div class="ddpop" id="statusPop" onclick="event.stopPropagation()">
+                <div class="dd-h">Status</div>
+                <button class="dd-opt" onclick="pickStatus('all','By status')"><span class="dot" style="background:#6B7280"></span> All</button>
+                <button class="dd-opt" onclick="pickStatus('paid','Paid')"><span class="dot" style="background:var(--green)"></span> Paid</button>
+                <button class="dd-opt" onclick="pickStatus('processing','Processing')"><span class="dot" style="background:var(--amber)"></span> Processing</button>
+                <button class="dd-opt" onclick="pickStatus('failed','Failed')"><span class="dot" style="background:var(--red)"></span> Failed</button>
+              </div>
             </div>
+            
             <div class="calanchor">
-              <button class="select datebtn" id="dateBtn" onclick="toggleCal(event)"><svg class="ic sm"><use href="#i-cal"/></svg> <span id="dateLbl">Date range: last 90 days</span></button>
-              <div class="calpop" id="calPop">
-                <div class="cal-presets" id="calPresets"></div>
-                <div class="cal">
-                  <div class="cal-h">
-                    <button class="cal-nav" onclick="calNav(-1)"><svg class="ic sm"><use href="#i-arr-l"/></svg></button>
-                    <span class="m" id="calMonth"></span>
-                    <button class="cal-nav" onclick="calNav(1)"><svg class="ic sm"><use href="#i-arr-r"/></svg></button>
+              <button class="select datebtn" id="dateBtn" onclick="toggleCal(event)"><svg class="ic sm"><use href="#i-cal"/></svg> <span id="dateLbl">MM/dd/yyyy ~ MM/dd/yyyy</span><span class="dateclear" id="dateClear" onclick="clearDate(event)" title="Clear dates"><svg class="ic"><use href="#i-x"/></svg></span></button>
+              <div class="calpop" id="calPop" onclick="event.stopPropagation()">
+                <div class="cal-echo" id="calEcho">MM/dd/yyyy ~ MM/dd/yyyy</div>
+                <div class="cal-months" id="calMonths"></div>
+                <div class="cal-bar">
+                  <div class="cal-links">
+                    <button class="cal-link" onclick="calPreset('today')">Today</button>
+                    <button class="cal-link" onclick="calPreset('yday')">Yesterday</button>
+                    <button class="cal-link" onclick="calPreset('l7')">Last 7 Days</button>
                   </div>
-                  <div class="cal-grid" id="calGrid"></div>
-                  <div class="cal-foot" id="calFoot">Pick a start date, then an end date</div>
+                  <button class="cal-ok" id="calOkBtn" onclick="calOK()" disabled>OK</button>
                 </div>
               </div>
             </div>
-            <div class="searchpill"><svg class="ic sm"><use href="#i-search"/></svg><input id="fSearch" placeholder="Search Order ID or city…" oninput="renderOrders()"></div>
-            <div class="grow"></div>
-            <button class="btn primary" onclick="openNew()"><svg class="ic sm"><use href="#i-plus"/></svg> New Print Order</button>
+            <button class="btn primary" onclick="openNew()"><svg class="ic sm"><use href="#i-plus"/></svg> New</button>
           </div>
 
           <div class="tbl">
@@ -529,46 +575,46 @@ select.select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(
 
 <!-- Icon sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
-  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></symbol>
-  <symbol id="i-truck" viewBox="0 0 24 24"><rect x="1" y="6" width="13" height="10" rx="1"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/></symbol>
-  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M14,11.51h2.42a1,1,0,0,0,.71-.29l4.58-4.58a1,1,0,0,0,0-1.42L19.29,2.8a1,1,0,0,0-1.42,0L13.29,7.38a1.05,1.05,0,0,0-.29.71v2.42A1,1,0,0,0,14,11.51Zm1-3,3.58-3.58,1,1L16,9.51H15Zm6,2a1,1,0,0,0-1,1v7a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8.9l5.88,5.89a3,3,0,0,0,4.27,0,1,1,0,0,0,0-1.4,1,1,0,0,0-1.43,0,1,1,0,0,1-1.4,0L5.41,7.49H10a1,1,0,0,0,0-2H5a3,3,0,0,0-3,3v10a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3v-7A1,1,0,0,0,21,10.49Z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M20,8h0L14,2.74a3,3,0,0,0-4,0L4,8a3,3,0,0,0-1,2.26V19a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V10.25A3,3,0,0,0,20,8ZM14,20H10V15a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1Zm5-1a1,1,0,0,1-1,1H16V15a3,3,0,0,0-3-3H11a3,3,0,0,0-3,3v5H6a1,1,0,0,1-1-1V10.25a1,1,0,0,1,.34-.75l6-5.25a1,1,0,0,1,1.32,0l6,5.25a1,1,0,0,1,.34.75Z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M1,12.5v5a1,1,0,0,0,1,1H3a3,3,0,0,0,6,0h6a3,3,0,0,0,6,0h1a1,1,0,0,0,1-1V5.5a3,3,0,0,0-3-3H11a3,3,0,0,0-3,3v2H6A3,3,0,0,0,3.6,8.7L1.2,11.9a.61.61,0,0,0-.07.14l-.06.11A1,1,0,0,0,1,12.5Zm16,6a1,1,0,1,1,1,1A1,1,0,0,1,17,18.5Zm-7-13a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1v11h-.78a3,3,0,0,0-4.44,0H10Zm-2,6H4L5.2,9.9A1,1,0,0,1,6,9.5H8Zm-3,7a1,1,0,1,1,1,1A1,1,0,0,1,5,18.5Zm-2-5H8v2.78a3,3,0,0,0-4.22.22H3Z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M11.5,20h-6a1,1,0,0,1-1-1V5a1,1,0,0,1,1-1h5V7a3,3,0,0,0,3,3h3v5a1,1,0,0,0,2,0V9s0,0,0-.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.29.29,0,0,0-.1,0A1.1,1.1,0,0,0,11.56,2H5.5a3,3,0,0,0-3,3V19a3,3,0,0,0,3,3h6a1,1,0,0,0,0-2Zm1-14.59L15.09,8H13.5a1,1,0,0,1-1-1ZM7.5,14h6a1,1,0,0,0,0-2h-6a1,1,0,0,0,0,2Zm4,2h-4a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm-4-6h1a1,1,0,0,0,0-2h-1a1,1,0,0,0,0,2Zm13.71,6.29a1,1,0,0,0-1.42,0l-3.29,3.3-1.29-1.3a1,1,0,0,0-1.42,1.42l2,2a1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.21,16.29Z"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.7 4.6L18 9l-4.3 1.4L12 15l-1.7-4.6L6 9l4.3-1.4Z"/><path d="M18 14l.9 2.3L21 17l-2.1.7L18 20l-.9-2.3L15 17l2.1-.7Z"/></symbol>
-  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
-  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="19" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.3a1.6 1.6 0 0 0 1.6 1.3h8.3a1.6 1.6 0 0 0 1.6-1.3L22 7H6"/></symbol>
-  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></symbol>
-  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19,7H16V6A4,4,0,0,0,8,6V7H5A1,1,0,0,0,4,8V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V8A1,1,0,0,0,19,7ZM10,6a2,2,0,0,1,4,0V7H10Zm8,13a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V9H8v1a1,1,0,0,0,2,0V9h4v1a1,1,0,0,0,2,0V9h2Z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8.5,19A1.5,1.5,0,1,0,10,20.5,1.5,1.5,0,0,0,8.5,19ZM19,16H7a1,1,0,0,1,0-2h8.49121A3.0132,3.0132,0,0,0,18.376,11.82422L19.96143,6.2749A1.00009,1.00009,0,0,0,19,5H6.73907A3.00666,3.00666,0,0,0,3.92139,3H3A1,1,0,0,0,3,5h.92139a1.00459,1.00459,0,0,1,.96142.7251l.15552.54474.00024.00506L6.6792,12.01709A3.00006,3.00006,0,0,0,7,18H19a1,1,0,0,0,0-2ZM17.67432,7l-1.2212,4.27441A1.00458,1.00458,0,0,1,15.49121,12H8.75439l-.25494-.89221L7.32642,7ZM16.5,19A1.5,1.5,0,1,0,18,20.5,1.5,1.5,0,0,0,16.5,19Z"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M9,10h1a1,1,0,0,0,0-2H9a1,1,0,0,0,0,2Zm0,2a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM20,8.94a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.32.32,0,0,0-.09,0A.88.88,0,0,0,13.05,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V9S20,9,20,8.94ZM14,5.41,16.59,8H15a1,1,0,0,1-1-1ZM18,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4h5V7a3,3,0,0,0,3,3h3Zm-3-3H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2Z"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M9,10h1a1,1,0,0,0,0-2H9a1,1,0,0,0,0,2Zm0,2a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM20,8.94a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.32.32,0,0,0-.09,0A.88.88,0,0,0,13.05,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V9S20,9,20,8.94ZM14,5.41,16.59,8H15a1,1,0,0,1-1-1ZM18,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4h5V7a3,3,0,0,0,3,3h3Zm-3-3H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2Z"/></symbol>
   <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7Z"/><path d="M3 7l9 5 9-5M12 12v10"/></symbol>
-  <symbol id="i-mega" viewBox="0 0 24 24"><path d="m3 11 14-5v12L3 13Z"/><path d="M3 11v2a2 2 0 0 0 2 2h1"/><path d="M7 15v3a2 2 0 0 0 4 0v-1.5"/></symbol>
-  <symbol id="i-bars" viewBox="0 0 24 24"><line x1="5" y1="21" x2="5" y2="12"/><line x1="12" y1="21" x2="12" y2="4"/><line x1="19" y1="21" x2="19" y2="9"/></symbol>
-  <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19.99121,2.002a.99943.99943,0,0,0-1,1v.63672a9.03617,9.03617,0,0,1-7,3.36328h-6a3.00328,3.00328,0,0,0-3,3v2a3.00328,3.00328,0,0,0,3,3H6.475L4.07227,20.6084A.99931.99931,0,0,0,4.99121,22.002h4a.99857.99857,0,0,0,.91895-.60644L12.63391,15.04a9.02805,9.02805,0,0,1,6.3573,3.32507V19.002a1,1,0,0,0,2,0v-16A.99942.99942,0,0,0,19.99121,2.002Zm-14,11a1.00067,1.00067,0,0,1-1-1v-2a1.00068,1.00068,0,0,1,1-1h1v4Zm2.34082,7H6.50781l2.14258-5h1.82422ZM18.99121,15.5238a11.052,11.052,0,0,0-7-2.52185h-3v-4h3a11.05281,11.05281,0,0,0,7-2.52234Z"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M21,20H20V5a1,1,0,0,0-2,0V20H16V13a1,1,0,0,0-2,0v7H12V9a1,1,0,0,0-2,0V20H8V17a1,1,0,0,0-2,0v3H4V3A1,1,0,0,0,2,3V21a1,1,0,0,0,1,1H21a1,1,0,0,0,0-2Z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M20.34,9.32l-14-7a3,3,0,0,0-4.08,3.9l2.4,5.37h0a1.06,1.06,0,0,1,0,.82l-2.4,5.37A3,3,0,0,0,5,22a3.14,3.14,0,0,0,1.35-.32l14-7a3,3,0,0,0,0-5.36Zm-.89,3.57-14,7a1,1,0,0,1-1.35-1.3l2.39-5.37A2,2,0,0,0,6.57,13h6.89a1,1,0,0,0,0-2H6.57a2,2,0,0,0-.08-.22L4.1,5.41a1,1,0,0,1,1.35-1.3l14,7a1,1,0,0,1,0,1.78Z"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6Z"/></symbol>
-  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></symbol>
-  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
-  <symbol id="i-cd" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-  <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20v.01M17 20h.01M20 17h.01M20 20h.01"/></symbol>
-  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
-  <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
-  <symbol id="i-arr-l" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
-  <symbol id="i-arr-r" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M20,8.18V3a1,1,0,0,0-2,0V8.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V13.82a3,3,0,0,0,0-5.64ZM19,12a1,1,0,1,1,1-1A1,1,0,0,1,19,12Zm-6,2.18V3a1,1,0,0,0-2,0V14.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V19.82a3,3,0,0,0,0-5.64ZM12,18a1,1,0,1,1,1-1A1,1,0,0,1,12,18ZM6,6.18V3A1,1,0,0,0,4,3V6.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V11.82A3,3,0,0,0,6,6.18ZM5,10A1,1,0,1,1,6,9,1,1,0,0,1,5,10Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18,13.18V10a6,6,0,0,0-5-5.91V3a1,1,0,0,0-2,0V4.09A6,6,0,0,0,6,10v3.18A3,3,0,0,0,4,16v2a1,1,0,0,0,1,1H8.14a4,4,0,0,0,7.72,0H19a1,1,0,0,0,1-1V16A3,3,0,0,0,18,13.18ZM8,10a4,4,0,0,1,8,0v3H8Zm4,10a2,2,0,0,1-1.72-1h3.44A2,2,0,0,1,12,20Zm6-3H6V16a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-cd" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18.71,7.21a1,1,0,0,0-1.42,0L9.84,14.67,6.71,11.53A1,1,0,1,0,5.29,13l3.84,3.84a1,1,0,0,0,1.42,0l8.16-8.16A1,1,0,0,0,18.71,7.21Z"/></symbol>
+  <symbol id="i-check-c" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M14.72,8.79l-4.29,4.3L8.78,11.44a1,1,0,1,0-1.41,1.41l2.35,2.36a1,1,0,0,0,.71.29,1,1,0,0,0,.7-.29l5-5a1,1,0,0,0,0-1.42A1,1,0,0,0,14.72,8.79ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8 21H4a1 1 0 0 1-1-1v-4a1 1 0 0 0-2 0v4a3 3 0 0 0 3 3h4a1 1 0 0 0 0-2Zm14-6a1 1 0 0 0-1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 0 0 2h4a3 3 0 0 0 3-3v-4a1 1 0 0 0-1-1ZM20 1h-4a1 1 0 0 0 0 2h4a1 1 0 0 1 1 1v4a1 1 0 0 0 2 0V4a3 3 0 0 0-3-3ZM2 9a1 1 0 0 0 1-1V4a1 1 0 0 1 1-1h4a1 1 0 0 0 0-2H4a3 3 0 0 0-3 3v4a1 1 0 0 0 1 1Zm8-4H6a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1ZM9 9H7V7h2Zm5 2h4a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1Zm1-4h2v2h-2Zm-5 6H6a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1Zm-1 4H7v-2h2Zm5-1a1 1 0 0 0 1-1 1 1 0 0 0 0-2h-1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1Zm4-3a1 1 0 0 0-1 1v3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1Zm-4 4a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M2.5,8.86l9,5.2a1,1,0,0,0,1,0l9-5.2A1,1,0,0,0,22,8a1,1,0,0,0-.5-.87l-9-5.19a1,1,0,0,0-1,0l-9,5.19A1,1,0,0,0,2,8,1,1,0,0,0,2.5,8.86ZM12,4l7,4-7,4L5,8Zm8.5,7.17L12,16,3.5,11.13a1,1,0,0,0-1.37.37,1,1,0,0,0,.37,1.36l9,5.2a1,1,0,0,0,1,0l9-5.2a1,1,0,0,0,.37-1.36A1,1,0,0,0,20.5,11.13Zm0,4L12,20,3.5,15.13a1,1,0,0,0-1.37.37,1,1,0,0,0,.37,1.36l9,5.2a1,1,0,0,0,1,0l9-5.2a1,1,0,0,0,.37-1.36A1,1,0,0,0,20.5,15.13Z"/></symbol>
+  <symbol id="i-printer" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M7,10a1,1,0,1,0,1,1A1,1,0,0,0,7,10ZM19,6H18V3a1,1,0,0,0-1-1H7A1,1,0,0,0,6,3V6H5A3,3,0,0,0,2,9v6a3,3,0,0,0,3,3H6v3a1,1,0,0,0,1,1H17a1,1,0,0,0,1-1V18h1a3,3,0,0,0,3-3V9A3,3,0,0,0,19,6ZM8,4h8V6H8Zm8,16H8V16h8Zm4-5a1,1,0,0,1-1,1H18V15a1,1,0,0,0-1-1H7a1,1,0,0,0-1,1v1H5a1,1,0,0,1-1-1V9A1,1,0,0,1,5,8H19a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"/></symbol>
+  <symbol id="i-arr-l" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17,11H9.41l3.3-3.29a1,1,0,1,0-1.42-1.42l-5,5a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L9.41,13H17a1,1,0,0,0,0-2Z"/></symbol>
+  <symbol id="i-arr-r" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></symbol>
   <symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 9l4-5 4 5M8 15l4 5 4-5"/></symbol>
-  <symbol id="i-sortd" viewBox="0 0 24 24"><path d="M6 5v13M6 18l-2.6-2.6M6 18l2.6-2.6"/><path d="M12 6h9M12 12h7M12 18h5"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
-  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
-  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8L9.5 3.5A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
-  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3-3-6 6"/></symbol>
-  <symbol id="i-cu" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
-  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
-  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
-  <symbol id="i-pkg" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></symbol>
-  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></symbol>
+  <symbol id="i-sortd" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M6.29,14.29l-.29.3V7A1,1,0,0,0,4,7v7.59l-.29-.3a1,1,0,0,0-1.42,1.42l2,2a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l2-2a1,1,0,0,0-1.42-1.42ZM11,8H21a1,1,0,0,0,0-2H11a1,1,0,0,0,0,2Zm10,3H11a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Zm0,5H11a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12,19a1,1,0,1,0-1-1A1,1,0,0,0,12,19Zm5,0a1,1,0,1,0-1-1A1,1,0,0,0,17,19Zm0-4a1,1,0,1,0-1-1A1,1,0,0,0,17,15Zm-5,0a1,1,0,1,0-1-1A1,1,0,0,0,12,15ZM19,3H18V2a1,1,0,0,0-2,0V3H8V2A1,1,0,0,0,6,2V3H5A3,3,0,0,0,2,6V20a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V6A3,3,0,0,0,19,3Zm1,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V11H20ZM20,9H4V6A1,1,0,0,1,5,5H6V6A1,1,0,0,0,8,6V5h8V6a1,1,0,0,0,2,0V5h1a1,1,0,0,1,1,1ZM7,15a1,1,0,1,0-1-1A1,1,0,0,0,7,15Zm0,4a1,1,0,1,0-1-1A1,1,0,0,0,7,19Z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12,16a1,1,0,1,0,1,1A1,1,0,0,0,12,16Zm10.67,1.47-8.05-14a3,3,0,0,0-5.24,0l-8,14A3,3,0,0,0,3.94,22H20.06a3,3,0,0,0,2.61-4.53Zm-1.73,2a1,1,0,0,1-.88.51H3.94a1,1,0,0,1-.88-.51,1,1,0,0,1,0-1l8-14a1,1,0,0,1,1.78,0l8.05,14A1,1,0,0,1,20.94,19.49ZM12,8a1,1,0,0,0-1,1v4a1,1,0,0,0,2,0V9A1,1,0,0,0,12,8Z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19,5.5H12.72l-.32-1a3,3,0,0,0-2.84-2H5a3,3,0,0,0-3,3v13a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V8.5A3,3,0,0,0,19,5.5Zm1,13a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5.5a1,1,0,0,1,1-1H9.56a1,1,0,0,1,.95.68l.54,1.64A1,1,0,0,0,12,7.5h7a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M19,4H5A3,3,0,0,0,2,7V17a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4ZM5,18a1,1,0,0,1-1-1V14.58l3.3-3.29a1,1,0,0,1,1.4,0L15.41,18Zm15-1a1,1,0,0,1-1,1h-.77l-3.81-3.83.88-.88a1,1,0,0,1,1.4,0L20,16.58Zm0-3.24-1.88-1.87a3.06,3.06,0,0,0-4.24,0l-.88.88L10.12,9.89a3.06,3.06,0,0,0-4.24,0L4,11.76V7A1,1,0,0,1,5,6H19a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-cu" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17,13.41,12.71,9.17a1,1,0,0,0-1.42,0L7.05,13.41a1,1,0,0,0,0,1.42,1,1,0,0,0,1.41,0L12,11.29l3.54,3.54a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29A1,1,0,0,0,17,13.41Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12,13a1.49,1.49,0,0,0-1,2.61V17a1,1,0,0,0,2,0V15.61A1.49,1.49,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18,10.82a1,1,0,0,0-1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8A1,1,0,0,1,5,7h7.18a1,1,0,0,0,0-2H5A3,3,0,0,0,2,8V19a3,3,0,0,0,3,3H16a3,3,0,0,0,3-3V11.82A1,1,0,0,0,18,10.82Zm3.92-8.2a1,1,0,0,0-.54-.54A1,1,0,0,0,21,2H15a1,1,0,0,0,0,2h3.59L8.29,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V9a1,1,0,0,0,2,0V3A1,1,0,0,0,21.92,2.62Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18,4.48a8.45,8.45,0,0,0-12,12l5.27,5.28a1,1,0,0,0,1.42,0L18,16.43A8.45,8.45,0,0,0,18,4.48ZM16.57,15,12,19.59,7.43,15a6.46,6.46,0,1,1,9.14,0ZM9,7.41a4.32,4.32,0,0,0,0,6.1,4.31,4.31,0,0,0,7.36-3,4.24,4.24,0,0,0-1.26-3.05A4.3,4.3,0,0,0,9,7.41Zm4.69,4.68a2.33,2.33,0,1,1,.67-1.63A2.33,2.33,0,0,1,13.64,12.09Z"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M7,15h3a1,1,0,0,0,0-2H7a1,1,0,0,0,0,2ZM19,5H5A3,3,0,0,0,2,8v9a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V8A3,3,0,0,0,19,5Zm1,12a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V11H20Zm0-8H4V8A1,1,0,0,1,5,7H19a1,1,0,0,1,1,1Z"/></symbol>
+  <symbol id="i-pkg" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M20.49,7.52a.19.19,0,0,1,0-.08.17.17,0,0,1,0-.07l0-.09-.06-.15,0,0h0l0,0,0,0a.48.48,0,0,0-.09-.11l-.09-.08h0l-.05,0,0,0L16.26,4.45h0l-3.72-2.3A.85.85,0,0,0,12.25,2h-.08a.82.82,0,0,0-.27,0h-.1a1.13,1.13,0,0,0-.33.13L4,6.78l-.09.07-.09.08L3.72,7l-.05.06,0,0-.06.15,0,.09v.06a.69.69,0,0,0,0,.2v8.73a1,1,0,0,0,.47.85l7.5,4.64h0l0,0,.15.06.08,0a.86.86,0,0,0,.52,0l.08,0,.15-.06,0,0h0L20,17.21a1,1,0,0,0,.47-.85V7.63S20.49,7.56,20.49,7.52ZM12,4.17l1.78,1.1L8.19,8.73,6.4,7.63Zm-1,15L5.5,15.81V9.42l5.5,3.4Zm1-8.11L10.09,9.91l5.59-3.47L17.6,7.63Zm6.5,4.72L13,19.2V12.82l5.5-3.4Z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z"/></symbol>
 </svg>
 
 <script>
@@ -911,45 +957,53 @@ function placeOrder(){
 }
 function finishCheckout(id){
   clearSel();
-  document.getElementById('fStatus').value='all'; document.getElementById('fSearch').value='';
+  pickStatus('all','By status'); document.getElementById('fSearch').value='';
   closeOv('ov-co'); renderKPIs(); renderOrders(); goOrders(); toast('Sent to print · '+id);
 }
 
 /* ================= ORDERS LIST ================= */
 const SM={paid:{c:'ok',l:'Paid'},processing:{c:'proc',l:'Processing'},failed:{c:'fail',l:'Failed'}};
 
-/* ---- calendar range picker ---- */
+/* ---- calendar range picker (DS Date Range: dual month + OK) ---- */
 const ISO_TODAY='2026-07-02';
 function iso(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
 function isoShift(isoStr,days){const d=new Date(isoStr+'T00:00:00');d.setDate(d.getDate()+days);return iso(d.getFullYear(),d.getMonth(),d.getDate());}
-function isoFmt(isoStr){return new Date(isoStr+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});}
-const CAL={view:new Date(2026,6,1),start:isoShift(ISO_TODAY,-90),end:ISO_TODAY,preset:'l90',picking:false};
-const PRESETS=[{k:'l30',l:'Last 30 days',f:()=>[isoShift(ISO_TODAY,-30),ISO_TODAY]},
-               {k:'l90',l:'Last 90 days',f:()=>[isoShift(ISO_TODAY,-90),ISO_TODAY]},
-               {k:'year',l:'This year',f:()=>['2026-01-01',ISO_TODAY]},
-               {k:'all',l:'All time',f:()=>[null,null]}];
-function toggleCal(e){e.stopPropagation();const p=document.getElementById('calPop');p.classList.toggle('open');if(p.classList.contains('open'))renderCal();}
-function calNav(d){CAL.view=new Date(CAL.view.getFullYear(),CAL.view.getMonth()+d,1);renderCal();}
-function applyPreset(k){
-  const pr=PRESETS.find(p=>p.k===k);[CAL.start,CAL.end]=pr.f();CAL.preset=k;CAL.picking=false;
-  document.getElementById('dateLbl').textContent = k==='all'?'Date range: all time':(k==='year'?'Date range: this year':`Date range: last ${k==='l30'?30:90} days`);
-  renderCal();renderOrders();
-}
-function pickDay(d){
-  if(!CAL.picking||!CAL.start||CAL.end){CAL.start=d;CAL.end=null;CAL.picking=true;}
-  else if(d<CAL.start){CAL.start=d;}
-  else {CAL.end=d;CAL.picking=false;}
-  CAL.preset=null;
-  if(CAL.start&&CAL.end){
-    document.getElementById('dateLbl').textContent=`${isoFmt(CAL.start)} – ${isoFmt(CAL.end)}, 2026`;
-    renderOrders();
-  }
+function usFmt(isoStr){const[y,m,d]=isoStr.split('-');return `${m}/${d}/${y}`;}
+const CAL={base:new Date(2026,6,1),start:null,end:null,ps:null,pe:null,picking:false};
+const PH='MM/dd/yyyy ~ MM/dd/yyyy';
+let FSTATUS='all';
+function toggleStatusDD(e){e.stopPropagation();const p=document.getElementById('statusPop');const open=!p.classList.contains('open');closePops();if(open){p.classList.add('open');document.getElementById('statusChev').style.transform='rotate(180deg)';document.getElementById('statusBtn').classList.add('open');}}
+function pickStatus(v,label){FSTATUS=v;document.getElementById('statusLbl').textContent=label;document.getElementById('statusBtn').classList.toggle('filled',v!=='all');closePops();renderOrders();}
+function closePops(){document.querySelectorAll('.ddpop.open,.calpop.open').forEach(x=>x.classList.remove('open'));const ch=document.getElementById('statusChev');if(ch)ch.style.transform='';const b=document.getElementById('statusBtn');if(b)b.classList.remove('open');}
+function clearDate(e){e.stopPropagation();CAL.start=CAL.end=CAL.ps=CAL.pe=null;CAL.picking=false;
+  document.getElementById('dateLbl').textContent=PH;
+  document.getElementById('dateBtn').classList.remove('hasval');
+  closePops();renderOrders();}
+function toggleCal(e){e.stopPropagation();const p=document.getElementById('calPop');const willOpen=!p.classList.contains('open');closePops();
+  if(willOpen){CAL.ps=CAL.start;CAL.pe=CAL.end;CAL.picking=false;p.classList.add('open');renderCal();}}
+function calShift(d){CAL.base=new Date(CAL.base.getFullYear(),CAL.base.getMonth()+d,1);renderCal();}
+function calPreset(k){
+  if(k==='today'){CAL.ps=CAL.pe=ISO_TODAY;}
+  else if(k==='yday'){CAL.ps=CAL.pe=isoShift(ISO_TODAY,-1);}
+  else {CAL.ps=isoShift(ISO_TODAY,-6);CAL.pe=ISO_TODAY;}
+  CAL.picking=false;
+  CAL.base=new Date(CAL.ps.slice(0,4),+CAL.ps.slice(5,7)-1,1);
   renderCal();
 }
-function renderCal(){
-  document.getElementById('calPresets').innerHTML=PRESETS.map(p=>`<button class="${CAL.preset===p.k?'on':''}" onclick="applyPreset('${p.k}')">${p.l}</button>`).join('');
-  const y=CAL.view.getFullYear(),m=CAL.view.getMonth();
-  document.getElementById('calMonth').textContent=CAL.view.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+function pickDay(d){
+  if(!CAL.picking||!CAL.ps||CAL.pe){CAL.ps=d;CAL.pe=null;CAL.picking=true;}
+  else if(d<CAL.ps){CAL.ps=d;}
+  else {CAL.pe=d;CAL.picking=false;}
+  renderCal();
+}
+function calOK(){
+  if(!(CAL.ps&&CAL.pe))return;
+  CAL.start=CAL.ps;CAL.end=CAL.pe;
+  document.getElementById('dateLbl').textContent=`${usFmt(CAL.start)} ~ ${usFmt(CAL.end)}`;
+  document.getElementById('dateBtn').classList.add('hasval');
+  closePops();renderOrders();
+}
+function monthHTML(y,m){
   const first=new Date(y,m,1),startDow=(first.getDay()+6)%7,dim=new Date(y,m+1,0).getDate(),dimPrev=new Date(y,m,0).getDate();
   let cells='';
   ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(d=>cells+=`<span class="cal-dow">${d}</span>`);
@@ -959,33 +1013,46 @@ function renderCal(){
     else if(i>=startDow+dim){d=i-startDow-dim+1;mm=m+1;mut='mut';}
     else d=i-startDow+1;
     const dd=new Date(yy,mm,d), di=iso(dd.getFullYear(),dd.getMonth(),dd.getDate());
-    const future=di>ISO_TODAY;
     let cls='cal-d '+mut;
-    if(future)cls+=' dis';
-    if(CAL.start&&di===CAL.start)cls+=' st';
-    if(CAL.end&&di===CAL.end)cls+=' en';
-    if(CAL.start&&CAL.end&&di>CAL.start&&di<CAL.end)cls+=' inr';
-    if((CAL.start&&di===CAL.start&&CAL.end)||(CAL.end&&di===CAL.end))cls+=CAL.start!==CAL.end?' inr':'';
-    cells+=`<button class="${cls}" ${future?'':`onclick="pickDay('${di}')"`}>${d}</button>`;
+    if(di===ISO_TODAY)cls+=' today';
+    if(CAL.ps&&di===CAL.ps)cls+=' st';
+    if(CAL.pe&&di===CAL.pe)cls+=' en';
+    if(CAL.ps&&CAL.pe&&di>CAL.ps&&di<CAL.pe)cls+=' inr';
+    if(CAL.ps&&CAL.pe&&CAL.ps!==CAL.pe&&(di===CAL.ps||di===CAL.pe))cls+=' inr';
+    cells+=`<button class="${cls}" onclick="pickDay('${di}')">${d}</button>`;
   }
-  document.getElementById('calGrid').innerHTML=cells;
-  document.getElementById('calFoot').textContent = CAL.picking&&CAL.start&&!CAL.end
-    ? `Start: ${isoFmt(CAL.start)} — now pick an end date`
-    : 'Pick a start date, then an end date';
+  const name=new Date(y,m,1).toLocaleDateString('en-US',{month:'short',year:'numeric'});
+  return `<div class="cal-month">
+    <div class="cal-h">
+      <button class="cal-nav" onclick="calShift(-1)"><svg class="ic"><use href="#i-cd" transform="rotate(90 12 12)"/></svg></button>
+      <span class="m">${name}</span>
+      <button class="cal-nav" onclick="calShift(1)"><svg class="ic"><use href="#i-cd" transform="rotate(-90 12 12)"/></svg></button>
+    </div>
+    <div class="cal-grid">${cells}</div>
+  </div>`;
+}
+function renderCal(){
+  const y=CAL.base.getFullYear(),m=CAL.base.getMonth();
+  document.getElementById('calMonths').innerHTML=monthHTML(y,m)+monthHTML(y,m+1);
+  const echo=document.getElementById('calEcho');
+  if(CAL.ps&&CAL.pe){echo.textContent=`${usFmt(CAL.ps)} ~ ${usFmt(CAL.pe)}`;echo.classList.add('set');}
+  else if(CAL.ps){echo.textContent=`${usFmt(CAL.ps)} ~ MM/dd/yyyy`;echo.classList.add('set');}
+  else {echo.textContent=PH;echo.classList.remove('set');}
+  document.getElementById('calOkBtn').disabled=!(CAL.ps&&CAL.pe);
 }
 document.addEventListener('click',e=>{
-  const p=document.getElementById('calPop');
-  if(p&&p.classList.contains('open')&&!e.target.closest('.calanchor'))p.classList.remove('open');
+  if(!e.target.closest('.calanchor')&&!e.target.closest('.ddanchor'))closePops();
 });
 function renderKPIs(){
   const total=ORDERS.length,items=ORDERS.reduce((s,o)=>s+o.items,0),
     paid=ORDERS.filter(o=>o.status==='paid').length,failed=ORDERS.filter(o=>o.status==='failed').length,proc=ORDERS.filter(o=>o.status==='processing').length;
-  kOrders.textContent=total; kItems.textContent=items; kDone.textContent=paid;
-  kDoneSub.textContent=total?`${Math.round(paid/total*100)}% of orders`:'—';
-  kAttn.textContent=failed+proc; kAttnSub.textContent=`${failed} failed · ${proc} processing`;
+  kOrders.textContent=total;
+  kItems.textContent=`${items} (all orders)`;
+  kDone.textContent=total?`${paid} (${Math.round(paid/total*100)}%)`:`${paid}`;
+  kAttn.textContent=`${failed+proc} (${failed} failed · ${proc} processing)`;
 }
 function filteredOrders(){
-  const q=(document.getElementById('fSearch').value||'').trim().toLowerCase(), st=document.getElementById('fStatus').value;
+  const q=(document.getElementById('fSearch').value||'').trim().toLowerCase(), st=FSTATUS;
   return ORDERS.filter(o=>{
     if(st!=='all'&&o.status!==st)return false;
     if(CAL.start&&o.date<CAL.start)return false;
